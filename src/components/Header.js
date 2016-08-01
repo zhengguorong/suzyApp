@@ -12,13 +12,21 @@ export default class Counter extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, rightBtn, rightPress, showBackBtn } = this.props;
     return (
       <View>
         <View style={styles.container}>
-          <TouchableOpacity onPress={this._pop.bind(this)}><View style={styles.leftBtn}><Icon name='md-arrow-back' size={30}/></View></TouchableOpacity>
+          <TouchableOpacity onPress={this._pop.bind(this) }>
+            <View style={styles.leftBtn}>
+              {showBackBtn?<Icon name='md-arrow-back' size={30}/>:<View></View>}
+            </View>
+          </TouchableOpacity>
           <Text style={styles.title}>{title}</Text>
-          <TouchableOpacity><View style={styles.rightBtn}><Icon name="ios-create-outline" size={30}/></View></TouchableOpacity>
+          <TouchableOpacity onPress={rightPress}>
+            <View style={styles.rightBtn}>
+              {rightBtn}
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.line}></View>
       </View>

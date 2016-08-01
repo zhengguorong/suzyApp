@@ -24,9 +24,17 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
     case types.FRESH_POST_FINISH:
       return Object.assign({}, state, { refreshing: false })
     case types.ADD_COMMENT_SUCCESS:
-      return Object.assign({}, state, { addCommnetResult: action.result })
+      return Object.assign({}, state, { addCommnetResult: 'success' })
     case types.ADD_COMMENT_FAIL:
-      return Object.assign({}, state, { addCommnetResult: action.result })
+      return Object.assign({}, state, { addCommnetResult: 'fail' })
+    case types.LIKE_SUCCESS:
+      return Object.assign({}, state, { likeResult: 'success' })
+    case types.LIKE_SUCCESS:
+      return Object.assign({}, state, { likeResult: 'fail' })
+    case types.UNLIKE_SUCCESS:
+      return Object.assign({}, state, { unlikeResult: 'success' })
+    case types.UNLIKE_FAIL:
+      return Object.assign({}, state, { unlikeResult: 'fail' })
     default:
       return state
   }

@@ -33,12 +33,39 @@ export const getPostDetail = (id) => {
  * 添加评论
  */
 export const addComment = (pId, author, content) => {
-    return (dispatch) => (
-        http.post(tools.domain + '/api/article/detail/', { pId: pId, author: author, content: content }, function (data) {
+    return (dispatch) => {
+        http.post(tools.domain + '/api/reply/', { pId: pId, author: author, content: content }, function (data) {
             dispatch({ type: types.ADD_COMMENT_SUCCESS, result: data })
         }, function (err) {
-            dispatch({ type: types.ADD_COMMENT_FAIL, result: data })
+            dispatch({ type: types.ADD_COMMENT_FAIL, result: err })
             console.log(err);
         }, dispatch)
-    )
+    }
+}
+/**
+ * 点赞
+ */
+export const like = (id)=>{
+    return (dispatch) => {
+        http.put(tools.domain + '/api/article/'+id, {like:1},function (data) {
+            console.log('like',data)
+            dispatch({ type: types.LIKE_SUCCESS, result: data })
+        }, function (err) {
+            dispatch({ type: types.LIKE_FAIL, result: err })
+            console.log(err);
+        }, dispatch)
+    }    
+}
+/**
+ * 取消点赞
+ */
+export const unlike = (id)=>{
+    return (dispatch) => {
+        http.put(tools.domain + '/api/article/'+id, {like:0},function (data) {
+            dispatch({ type: types.UNLIKE_SUCCESS, result: data })
+        }, function (err) {
+            dispatch({ type: types.UNLIKE_FAIL, result: err })
+            console.log(err);
+        }, dispatch)
+    }    
 }

@@ -12,6 +12,7 @@ import * as postActions from '../../actions/postActions'
 import tools from '../../util/tools'
 import Header from '../../components/Header'
 import CommentList from '../../components/CommentList'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class PostDetail extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class PostDetail extends Component {
         const content = article.content && article.content.replace(/<br>/g, "\n")
         return (
             <View style={styles.container}>
-                <Header navigator={this.props.navigator} title={this.props.title}/>
+                <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} rightBtn={<Icon name="ios-create-outline" size={30}/>}/>
                 <ScrollView style={styles.scrollView} contentInset={{ bottom: 55 }}>
                     <Image source={{ uri: pic }} style={styles.pic} resizeMode={Image.resizeMode.cover}/>
                     <View style={styles.contentView}><Text style={styles.contentFont}>{content}</Text></View>

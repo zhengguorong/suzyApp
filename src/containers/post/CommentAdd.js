@@ -7,7 +7,8 @@ import {StyleSheet,
     TouchableOpacity,
     Image,
     ScrollView,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 import {bindActionCreators} from 'redux'
 import * as postActions from '../../actions/postActions'
@@ -21,11 +22,18 @@ class CommentAdd extends Component {
         super(props);
     }
 
+    componentDidUpdate() {
+        if (this.props.addCommnetResult === 'success') {
+            Alert.alert('结果',"添加成功",[{text:'返回',onPress:()=>{ this.props.navigator.pop()}}])
+        }else if(this.props.addCommnetResult === 'fail'){
+            Alert.alert('结果','添加失败')
+        }
+    }
+
     render() {
-        const {commentText} = this.props;
         return (
             <View>
-                <Header title={'添加留言'} navigator={this.props.navigator}/>
+                <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} rightPress={this._saveComment.bind(this) } rightBtn={<Text>发送</Text>}/>
                 <View>
                     <TextInput
                         ref='commentText'
@@ -33,29 +41,35 @@ class CommentAdd extends Component {
                         autoFocus={true}
                         multiline={true}
                         placeholder={'请输入评论内容'}
+                        onChangeText={(text) => { this.refs['commentText'].value = text } }
                         />
                 </View>
             </View>
         )
     }
-    _saveComment(text) {
-        if(!text){
-            alert("请输入内容")
+    _saveComment() {
+        const {addComment} = this.props
+        const text = this.refs['commentText'].value
+        if (!text) {
+            Alert.alert('提示','请输入内容')
             return
         }
         const itemId = this.props.itemId
-        postActions.addComment(itemId,'rong',this.refs['commentText'].text)
+        addComment(itemId, 'rong', text)
     }
 
 }
 const styles = StyleSheet.create({
-    textInput:{
-        borderWidth:0,
-        height:200,
-        padding:10,
-        fontSize:14
+    textInput: {
+        borderWidth: 0,
+        height: 200,
+        padding: 10,
+        fontSize: 14
     }
 })
 
 
-export default connect()(CommentAdd);
+export default connect(state => ({ addCommnetResult: state.post.addCommnetResult || {} }),
+    (dispatch) => ({
+        addComment: (itemId, author, text) => dispatch(postActions.addComment(itemId, author, text)),
+    }))(CommentAdd);

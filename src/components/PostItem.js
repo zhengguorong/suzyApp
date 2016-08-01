@@ -20,7 +20,7 @@ export default class Counter extends Component {
   }
 
   render() {
-    const { post, itemPress, toCommentAdd } = this.props
+    const { post, itemPress, toCommentAdd,like } = this.props
     const pic = tools.domain + post.pic
     const createDate = new Date(parseInt(post.createTime));
     const createTime = createDate.getHours() + ':' + createDate.getMinutes()
@@ -32,10 +32,13 @@ export default class Counter extends Component {
         <View style={styles.createDateView}><Text style={styles.createDateFont}>{post.displayTime} {createTime}</Text></View>
         <TouchableWithoutFeedback onPress={itemPress}><View style={styles.contentView}><Text style={styles.contentFont}>{content}</Text></View></TouchableWithoutFeedback>
         <View style={styles.statusView}>
-          <TouchableOpacity onPress={toCommentAdd}><Icon name='md-text' backgroundColor="#fff" style={styles.commentIcon} color='rgb(128,124,124)' size={20} /></TouchableOpacity>
+
+            <Icon.Button onPress={toCommentAdd} name='md-text' backgroundColor="#fff" style={styles.commentIcon} color='rgb(128,124,124)' size={20}>
+              <Text style={{paddingTop:-2}}>{post.commentCount}</Text>
+            </Icon.Button>
 
           <TouchableOpacity>
-            {post.like===0?<Icon name='md-heart' style={styles.heartIcon}  color='rgb(128,124,124)' size={20}></Icon>:<Icon name='md-heart' style={styles.heartIcon}  color='red' size={20}></Icon>}
+            {post.like === 0 ? <Icon onPress={like} name='md-heart-outline' style={styles.heartIcon}  color='rgb(128,124,124)' size={20}/> : <Icon name='md-heart' style={styles.heartIcon}  color='red' size={20}/>}
           </TouchableOpacity>
         </View>
       </View>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   commentIcon: {
-    width: 40,
+    width: 50,
     padding: 10
   }
 });

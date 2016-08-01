@@ -42,7 +42,7 @@ class App extends Component {
                 onPress={() => {
                     setSelectedTab('member')
                 }}>
-                <Navigation component={Mark}/>
+                <Navigation component={PostList}/>
             </Icon.TabBarItemIOS>
    
         </TabBarIOS>

@@ -34,7 +34,6 @@ export default class CommentList extends Component {
         )
     }
     _renderRow(row) {
-        console.log('row', row);
         const date = new Date(parseInt(row.createTime))
         const displayTime = date.getHours() + ':' + date.getMinutes()
         return (

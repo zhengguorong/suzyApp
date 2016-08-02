@@ -15,5 +15,5 @@ module.exports = {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },
-  domain:'http://localhost:3000'
+  domain:'http://suzyapp.duapp.com'
 }

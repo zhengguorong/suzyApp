@@ -24,7 +24,7 @@ export default class Counter extends Component {
     const pic = tools.domain + post.pic
     const createDate = new Date(parseInt(post.createTime));
     const createTime = createDate.getHours() + ':' + createDate.getMinutes()
-    const content = post.content.replace(/<br>/g, "\n")
+    const content = post.content&&post.content.replace(/<br>/g, "\n")||''
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={itemPress}><Image style={styles.pic} source={{ uri: pic }} resizeMode={Image.resizeMode.cover}/></TouchableOpacity>

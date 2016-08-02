@@ -9,6 +9,7 @@ import {StyleSheet,
   ScrollView,
   ListView,
   RefreshControl,
+  Navigator,
   Alert
 } from 'react-native';
 import {bindActionCreators} from 'redux'
@@ -31,17 +32,7 @@ class PostList extends Component {
     const {getPosts} = this.props;
     getPosts(1, 2);
   }
-  componentDidUpdate() {
-    if (this.props.likeResult === 'success') {
-      Alert.alert('结果', "点赞成功", [{ text: '确定', onPress: () => { } }])
-    } else if (this.props.likeResult === 'fail') {
-      Alert.alert('结果', '点赞失败')
-    } else if (this.props.unlikeResult === 'success') {
-      Alert.alert('结果', "取消点赞成功", [{ text: '确定', onPress: () => { } }])
-    } else if (this.props.unlikeResult === 'fail') {
-      Alert.alert('结果', "取消点赞失败")
-    }
-  }
+
 
   render() {
     const { dataSource, refreshing } = this.props;
@@ -91,6 +82,7 @@ class PostList extends Component {
   }
   _toPostAdd() {
     this.props.navigator.push({
+      name:'postAdd',
       component: PostAdd,
       passProps: {
         title: '',
@@ -99,12 +91,14 @@ class PostList extends Component {
   }
   _like(id) {
     this.props.like(id)
+    alert('点赞成功')
   }
   _unlike(id) {
     this.props.unlike(id)
   }
   _toCommentAdd(id) {
     this.props.navigator.push({
+      name:'commentAdd',
       component: CommentAdd,
       passProps: {
         itemId: id,
@@ -117,17 +111,18 @@ class PostList extends Component {
     getPosts(1, 2);
   }
   _nextPage() {
-    const {getPosts, curPage, posts} = this.props;
-    if (posts.length == 0) {
+    const {getPosts,getNextPosts, curPage, posts,refreshing} = this.props;
+    if (posts.length == 0||refreshing) {
       return
     }
-    getPosts(curPage + 1, 2)
+    getNextPosts(curPage + 1, 2)
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor:'#fff'
   },
   flex: {
     flex: 1
@@ -152,6 +147,7 @@ export default connect(state => ({
 }),
   (dispatch) => ({
     getPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
+    getNextPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
     like: (id) => dispatch(postActions.like(id)),
     unlike: (id) => dispatch(postActions.unlike(id))
   })

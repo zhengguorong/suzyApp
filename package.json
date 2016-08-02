@@ -8,6 +8,8 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "0.30.0",
+    "react-native-image-picker": "^0.21.4",
+    "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",

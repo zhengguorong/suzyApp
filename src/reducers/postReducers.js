@@ -35,6 +35,17 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
       return Object.assign({}, state, { unlikeResult: 'success' })
     case types.UNLIKE_FAIL:
       return Object.assign({}, state, { unlikeResult: 'fail' })
+    case types.SELECTED_IMG:
+      return Object.assign({}, state, { selectedImg: action.selectedImg })
+    case types.ADD_POST_START:{
+      return Object.assign({}, state, {addPostLoading:true})
+    }
+    case types.ADD_POST_SUCCESS:
+      return Object.assign({}, state, { addPostResult: 'success',selectedImg:{},addPostLoading:false})
+    case types.ADD_POST_FAIL:
+      return Object.assign({}, state, { addPostResult: 'fail' })
+    case types.CLEAR_SELECTED_IMG:
+      return Object.assign({}, state, { selectedImg: {} })
     default:
       return state
   }

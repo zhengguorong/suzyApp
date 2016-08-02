@@ -29,7 +29,7 @@ class PostDetail extends Component {
         const content = article.content && article.content.replace(/<br>/g, "\n")
         return (
             <View style={styles.container}>
-                <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} rightBtn={<Icon name="ios-create-outline" size={30}/>}/>
+                <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} />
                 <ScrollView style={styles.scrollView} contentInset={{ bottom: 55 }}>
                     <Image source={{ uri: pic }} style={styles.pic} resizeMode={Image.resizeMode.cover}/>
                     <View style={styles.contentView}><Text style={styles.contentFont}>{content}</Text></View>
@@ -42,6 +42,7 @@ class PostDetail extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#fff'
     },
     scrollView:{
         // padding:15,

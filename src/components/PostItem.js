@@ -27,7 +27,7 @@ export default class Counter extends Component {
     const content = post.content&&post.content.replace(/<br>/g, "\n")||''
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={itemPress}><Image style={styles.pic} source={{ uri: pic }} resizeMode={Image.resizeMode.cover}/></TouchableOpacity>
+        <TouchableOpacity onPress={itemPress}><Image defaultSource={require('../image/defaultImg.png')} style={styles.pic} source={{ uri: pic }} resizeMode={Image.resizeMode.cover}/></TouchableOpacity>
         <View style={styles.authorView}><Text style={styles.authorFont}>{post.author} 发布</Text></View>
         <View style={styles.createDateView}><Text style={styles.createDateFont}>{post.displayTime} {createTime}</Text></View>
         <TouchableWithoutFeedback onPress={itemPress}><View style={styles.contentView}><Text style={styles.contentFont}>{content}</Text></View></TouchableWithoutFeedback>

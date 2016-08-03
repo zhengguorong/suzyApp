@@ -24,10 +24,12 @@ export const getPosts = (page, count) => {
  */
 export const getNextPosts = (page, count) => {
     return (dispatch) => {
+        dispatch({type:types.FETCH_NEXT_PAGE_START})
         http.get(tools.domain + '/api/article/?page=' + page + '&count=' + count, function (data) {
+            dispatch({type:types.FETCH_NEXT_PAGE_FINISH})
             dispatch({ type: types.FETCH_POST_LIST, posts: data, page: page })
         }, function (err) {
-            console.log(err);
+            dispatch({type:types.FETCH_NEXT_PAGE_FINISH})
         }, dispatch)
     }
 }
@@ -35,11 +37,12 @@ export const getNextPosts = (page, count) => {
  * 获取文章详情
  */
 export const getPostDetail = (id) => {
-    return (dispatch) => (
+    return (dispatch) => {
+        dispatch({type:types.FETCH_POST_DETAIL_START})
         http.get(tools.domain + '/api/article/detail/' + id, function (data) {
             dispatch({ type: types.FETCH_POST_DETAIL, post: data })
         }, function (err) { console.log(err) }, dispatch)
-    )
+    }
 }
 /**
  * 添加评论

@@ -15,5 +15,6 @@ module.exports = {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },
+  author:'rong',
   domain:'http://suzyapp.duapp.com'
 }

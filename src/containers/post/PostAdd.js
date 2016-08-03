@@ -36,7 +36,7 @@ class PostAdd extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex:1}}>
       <Spinner visible={this.props.addPostLoading}/>
         <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} rightPress={this._savePost.bind(this) } rightBtn={<Text>保存</Text>}/>
         <ScrollView style={styles.container}>
@@ -71,10 +71,14 @@ class PostAdd extends Component {
     const {selectedSource, addPost} = this.props;
     const title = this.refs['title'].value
     const content = this.refs['content'].value
-    const author = 'rong'
+    const author = tools.author
     const fileData = selectedSource.uri
     if (!content) {
       Alert.alert('提示', '请输入内容')
+      return
+    }
+    if(!fileData){
+      Alert.alert('提示', '请选择图片')
       return
     }
     addPost(title, content, author, fileData)
@@ -115,7 +119,7 @@ class PostAdd extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   titleView: {
 

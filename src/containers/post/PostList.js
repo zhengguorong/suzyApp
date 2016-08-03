@@ -10,7 +10,10 @@ import {StyleSheet,
   ListView,
   RefreshControl,
   Navigator,
-  Alert
+  Alert,
+  ActivityIndicator,
+  AlertIOS,
+  AsyncStorage
 } from 'react-native';
 import {bindActionCreators} from 'redux'
 import * as postActions from '../../actions/postActions'
@@ -31,14 +34,23 @@ class PostList extends Component {
   componentDidMount() {
     const {getPosts} = this.props;
     getPosts(1, 2);
+    //检查是否已经填写用户信息
+    AsyncStorage.getItem('author', (err,data) => {
+      if (!data) {
+        AlertIOS.prompt('👽来者何人！👽', null, [{ text: '确定', onPress: this._saveAuthor }], 'plain-text', 'rong')
+      }else{
+        tools.author=data
+      }
+    })
+
   }
 
 
   render() {
-    const { dataSource, refreshing } = this.props;
+    const { dataSource, refreshing, fetchingNext } = this.props;
     return (
       <View style={styles.container}>
-        <Header title={'Suzy.live'} navigator={this.props.navigator} rightBtn={<Icon name="ios-create-outline" size={30}/>} rightPress={this._toPostAdd.bind(this)}/>
+        <Header title={'Suzy.live'} navigator={this.props.navigator} rightBtn={<Icon name="ios-create-outline" size={30}/>} rightPress={this._toPostAdd.bind(this) }/>
         <View style={styles.flex}>
           <View>
             <Image style={styles.backgroundImage} source={require('../../image/bg.png') }></Image>
@@ -51,6 +63,7 @@ class PostList extends Component {
             onEndReachedThreshold={0}
             contentInset={{ top: -20 }}
             contentOffset={ { y: 20 }}
+            renderFooter={this._renderFooter.bind(this) }
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
@@ -60,8 +73,11 @@ class PostList extends Component {
                 titleColor="#000"
                 colors={['#ff0000', '#00ff00', '#0000ff']}
                 progressBackgroundColor="#000"
+
                 />}
             />
+
+
         </View>
       </View>
     );
@@ -69,6 +85,21 @@ class PostList extends Component {
   _renderRow(row) {
     return (
       <PostItem post={row} itemPress={this._toDetail.bind(this, row._id) } like={this._like.bind(this, row._id) } unLike={this._like.bind(this, row._id) } toCommentAdd={this._toCommentAdd.bind(this, row._id) }/>
+    )
+  }
+  _saveAuthor(author) {
+    AsyncStorage.setItem('author', author)
+    tools.author=author
+    
+  }
+  _renderFooter() {
+    return (
+      <ActivityIndicator
+        animating = {this.props.fetchingNext}
+        style = {{ height: 80 }
+        }
+        size = "large"
+        />
     )
   }
   _toDetail(id) {
@@ -82,7 +113,7 @@ class PostList extends Component {
   }
   _toPostAdd() {
     this.props.navigator.push({
-      name:'postAdd',
+      name: 'postAdd',
       component: PostAdd,
       passProps: {
         title: '',
@@ -98,7 +129,7 @@ class PostList extends Component {
   }
   _toCommentAdd(id) {
     this.props.navigator.push({
-      name:'commentAdd',
+      name: 'commentAdd',
       component: CommentAdd,
       passProps: {
         itemId: id,
@@ -111,8 +142,8 @@ class PostList extends Component {
     getPosts(1, 2);
   }
   _nextPage() {
-    const {getPosts,getNextPosts, curPage, posts,refreshing} = this.props;
-    if (posts.length == 0||refreshing) {
+    const {getPosts, getNextPosts, curPage, posts, refreshing} = this.props;
+    if (posts.length == 0 || refreshing) {
       return
     }
     getNextPosts(curPage + 1, 2)
@@ -122,7 +153,7 @@ class PostList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor: '#fff'
   },
   flex: {
     flex: 1
@@ -143,11 +174,12 @@ export default connect(state => ({
   refreshing: state.post.refreshing || false,
   curPage: state.post.curPage || 1,
   posts: state.post.posts || [],
-  likeResult: state.post.likeResult || {}
+  likeResult: state.post.likeResult || {},
+  fetchingNext: state.post.fetchingNext || false
 }),
   (dispatch) => ({
     getPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
-    getNextPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
+    getNextPosts: (page, count) => dispatch(postActions.getNextPosts(page, count)),
     like: (id) => dispatch(postActions.like(id)),
     unlike: (id) => dispatch(postActions.unlike(id))
   })

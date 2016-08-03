@@ -19,10 +19,16 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
       }
     case types.FETCH_POST_DETAIL:
       return Object.assign({}, state, { post: action.post })
+    case types.FETCH_POST_DETAIL_START:
+      return Object.assign({}, state, { post: {} })
     case types.FRESH_POST_START:
       return Object.assign({}, state, { refreshing: true })
     case types.FRESH_POST_FINISH:
       return Object.assign({}, state, { refreshing: false })
+    case types.FETCH_NEXT_PAGE_START:
+      return Object.assign({}, state, { fetchingNext: true })
+    case types.FETCH_NEXT_PAGE_FINISH:
+      return Object.assign({}, state, { fetchingNext: false })
     case types.ADD_COMMENT_SUCCESS:
       return Object.assign({}, state, { addCommnetResult: 'success' })
     case types.ADD_COMMENT_FAIL:
@@ -37,11 +43,11 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
       return Object.assign({}, state, { unlikeResult: 'fail' })
     case types.SELECTED_IMG:
       return Object.assign({}, state, { selectedImg: action.selectedImg })
-    case types.ADD_POST_START:{
-      return Object.assign({}, state, {addPostLoading:true})
+    case types.ADD_POST_START: {
+      return Object.assign({}, state, { addPostLoading: true })
     }
     case types.ADD_POST_SUCCESS:
-      return Object.assign({}, state, { addPostResult: 'success',selectedImg:{},addPostLoading:false})
+      return Object.assign({}, state, { addPostResult: 'success', selectedImg: {}, addPostLoading: false })
     case types.ADD_POST_FAIL:
       return Object.assign({}, state, { addPostResult: 'fail' })
     case types.CLEAR_SELECTED_IMG:

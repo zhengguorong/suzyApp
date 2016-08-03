@@ -56,7 +56,7 @@ class CommentAdd extends Component {
             return
         }
         const itemId = this.props.itemId
-        addComment(itemId, 'rong', text)
+        addComment(itemId, tools.author, text)
     }
 
 }

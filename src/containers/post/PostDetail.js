@@ -31,7 +31,7 @@ class PostDetail extends Component {
             <View style={styles.container}>
                 <Header navigator={this.props.navigator} title={this.props.title} showBackBtn={true} />
                 <ScrollView style={styles.scrollView} contentInset={{ bottom: 55 }}>
-                    <Image source={{ uri: pic }} style={styles.pic} resizeMode={Image.resizeMode.cover}/>
+                    <Image defaultSource={require('../../image/defaultImg.png')} source={{ uri: pic }} style={styles.pic} resizeMode={Image.resizeMode.cover}/>
                     <View style={styles.contentView}><Text style={styles.contentFont}>{content}</Text></View>
                     <CommentList data={replies}/>
                 </ScrollView>

@@ -1,7 +1,7 @@
 package com.suzy;
 
 import com.facebook.react.ReactActivity;
-import com.cmcewen.blurview.BlurViewPackage;
+import com.microsoft.codepush.react.CodePush;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 

@@ -773,7 +773,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.bluemoon.itteam;
 				PRODUCT_NAME = suzy;
-				PROVISIONING_PROFILE = "8c47d19a-0f86-4cc5-b00c-8a56dd3d6ce1";
+				PROVISIONING_PROFILE = "79004031-dfaa-4689-a8a6-e4eb3fe1bc21";
 			};
 			name = Debug;
 		};
@@ -803,7 +803,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.bluemoon.itteam;
 				PRODUCT_NAME = suzy;
-				PROVISIONING_PROFILE = "8c47d19a-0f86-4cc5-b00c-8a56dd3d6ce1";
+				PROVISIONING_PROFILE = "79004031-dfaa-4689-a8a6-e4eb3fe1bc21";
 			};
 			name = Release;
 		};

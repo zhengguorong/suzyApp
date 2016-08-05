@@ -4,11 +4,17 @@
 
 ##功能
 >下拉刷新
+
 >上拉加载更多
+
 >闪屏放大效果
+
 >文章列表
+
 >添加文章
+
 >添加评论
+
 >点赞
 
 ## 技术栈
@@ -17,7 +23,9 @@
 
 ##第三方组件
 >react-native-image-picker  拍照功能
+
 >react-native-loading-spinner-overlay 加载中遮罩
+
 >react-native-vector-icons 应用各种icon
 
 ## 安装步骤

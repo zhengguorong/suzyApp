@@ -30,6 +30,8 @@ npm install
 react-native run-ios
 ```
 
+##App下载地址
+![](download.png)
 
 ##演示效果
 ![](suzydemo.gif)

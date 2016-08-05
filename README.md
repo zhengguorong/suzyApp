@@ -23,7 +23,7 @@ react-native run-ios
 ```
 
 ##演示效果
-![](suzyApp.gif)
+
 
 
 

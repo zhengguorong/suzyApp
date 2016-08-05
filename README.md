@@ -22,9 +22,9 @@ npm install
 react-native run-ios
 ```
 
-## 效果截图
+##演示效果
+![](suzyApp.gif)
 
-![](http://test-10019075.cos.myqcloud.com/suzyApp.gif)
 
 
 

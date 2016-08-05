@@ -23,7 +23,9 @@ react-native run-ios
 ```
 
 ## 效果截图
+
 ![](http://test-10019075.cos.myqcloud.com/suzyApp.gif)
+
 
 
 

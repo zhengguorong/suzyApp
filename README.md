@@ -2,6 +2,14 @@
 
 > 使用react-native + redux开发的App
 
+##功能
+下拉刷新
+上拉加载更多
+闪屏放大效果
+文章列表
+添加文章
+添加评论
+点赞
 
 ## 技术栈
 react-native
@@ -22,10 +30,12 @@ npm install
 react-native run-ios
 ```
 
+
 ##演示效果
+![](suzydemo.gif)
 
-
-
+##后端代码
+github地址：https://github.com/zhengguorong/suzy
 
 
 

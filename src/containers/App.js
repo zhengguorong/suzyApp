@@ -8,6 +8,7 @@ import {
   Text,
   View,
   TabBarIOS,
+  Image,
   AsyncStorage } from 'react-native'
 import * as appActions from '../actions/appActions'
 import {bindActionCreators} from 'redux'
@@ -35,6 +36,10 @@ class App extends Component {
 
   render() {
     const { selectedTab, setSelectedTab, splashState, cover} = this.props;
+    //缓存图片
+    if (cover.img) {
+      Image.prefetch(cover.img)
+    }
     if (splashState) {
       return <SplashScreen cover={cover}/>
     } else {

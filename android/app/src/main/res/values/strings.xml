@@ -1,7 +1,3 @@
 <resources>
-    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">13EiW1uZsaHC5zJZIAyHtw5YU-W1E1XQZKyQZ</string>
-
-
-
     <string name="app_name">suzy</string>
 </resources>

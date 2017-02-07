@@ -15,6 +15,7 @@ import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Ionicons'
 import PostList from '../containers/post/PostList'
+import LikePostList from '../containers/post/LikePostList'
 import Mark from '../containers/post/Mark'
 import Navigation from '../components/Navigation'
 import SplashScreen from '../components/SplashScreen'
@@ -57,13 +58,13 @@ class App extends Component {
             <Navigation component={PostList}/>
           </Icon.TabBarItemIOS>
           <Icon.TabBarItemIOS
-            title='收藏'
+            title='喜😍欢'
             selected={selectedTab === 'member'}
             iconName={'ios-bookmarks-outline'}
             onPress={() => {
               setSelectedTab('member')
             } }>
-            <Navigation component={PostList}/>
+            <Navigation component={LikePostList}/>
           </Icon.TabBarItemIOS>
 
         </TabBarIOS>

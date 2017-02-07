@@ -20,7 +20,7 @@ export default class Counter extends Component {
   }
 
   render() {
-    const { post, itemPress, toCommentAdd,like } = this.props
+    const { post, itemPress, toCommentAdd,like,unLike } = this.props
     const pic = tools.domain + post.pic
     const createDate = new Date(parseInt(post.createTime));
     const createTime = createDate.getHours() + ':' + createDate.getMinutes()
@@ -38,7 +38,7 @@ export default class Counter extends Component {
             </Icon.Button>
 
           <TouchableOpacity>
-            {post.like === 0 ? <Icon onPress={like} name='md-heart-outline' style={styles.heartIcon}  color='rgb(128,124,124)' size={20}/> : <Icon name='md-heart' style={styles.heartIcon}  color='red' size={20}/>}
+            {post.like === 0 ? <Icon onPress={like} name='md-heart-outline' style={styles.heartIcon}  color='rgb(128,124,124)' size={20}/> : <Icon name='md-heart' onPress={unLike} style={styles.heartIcon}  color='red' size={20}/>}
           </TouchableOpacity>
         </View>
       </View>

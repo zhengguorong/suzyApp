@@ -27,14 +27,14 @@ import PostAdd from './PostAdd'
 import CommentAdd from './CommentAdd'
 
 
-class PostList extends Component {
+class LikePostList extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    const {getPosts, getLikePosts} = this.props;
+    const {getPosts} = this.props;
+    console.log('23333')
     getPosts(1, 2);
-    getLikePosts(1, 2)
     //检查是否已经填写用户信息
     AsyncStorage.getItem('author', (err,data) => {
       if (!data) {
@@ -171,18 +171,17 @@ const styles = StyleSheet.create({
 })
 
 export default connect(state => ({
-  dataSource: state.post.dataSource,
+  dataSource: state.post.likeDataSource,
   refreshing: state.post.refreshing || false,
-  curPage: state.post.curPage || 1,
-  posts: state.post.posts || [],
+  curPage: state.post.curLikePage || 1,
+  posts: state.post.likePosts || [],
   likeResult: state.post.likeResult || {},
   fetchingNext: state.post.fetchingNext || false
 }),
   (dispatch) => ({
-    getPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
-    getLikePosts: (page, count) => dispatch(postActions.getLikePosts(page, count)),
-    getNextPosts: (page, count) => dispatch(postActions.getNextPosts(page, count)),
+    getPosts: (page, count) => dispatch(postActions.getLikePosts(page, count)),
+    getNextPosts: (page, count) => dispatch(postActions.getNextLikePosts(page, count)),
     like: (post) => dispatch(postActions.like(post)),
     unlike: (post) => dispatch(postActions.unlike(post))
   })
-)(PostList);
+)(LikePostList);

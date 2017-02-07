@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import {ListView} from 'react-native'
+import { ListView } from 'react-native'
 /**
  * 文章相关reducer
  */
@@ -16,6 +16,16 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
       } else {
         dataSource = dataSource.cloneWithRows(action.posts);
         return Object.assign({}, state, { dataSource: dataSource, posts: action.posts, curPage: action.page })
+      }
+    case types.FETCH_LIKE_POST_LIST:
+      console.log(action.posts)
+      let likeDataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+      if (action.page > 1) {
+        likeDataSource = likeDataSource.cloneWithRows(state.likePosts.concat(action.posts))
+        return Object.assign({}, state, { likeDataSource: likeDataSource, likePosts: state.likePosts.concat(action.posts), curLikePage: action.page })
+      } else {
+        likeDataSource = likeDataSource.cloneWithRows(action.posts);
+        return Object.assign({}, state, { likeDataSource: likeDataSource, likePosts: action.posts, curLikePage: action.page })
       }
     case types.FETCH_POST_DETAIL:
       return Object.assign({}, state, { post: action.post })
@@ -50,6 +60,13 @@ const postReducers = (state = { dataSource: defaultDataSource }, action) => {
       return Object.assign({}, state, { addPostResult: 'success', selectedImg: {}, addPostLoading: false })
     case types.ADD_POST_FAIL:
       return Object.assign({}, state, { addPostResult: 'fail' })
+    case types.UPDATE_POST_START: {
+      return Object.assign({}, state, { updatePostLoading: true })
+    }
+    case types.UPDATE_POST_SUCCESS:
+      return Object.assign({}, state, { updatePostResult: 'success', updatePostLoading: false })
+    case types.UPDATE_POST_FAIL:
+      return Object.assign({}, state, { updatePostResult: 'fail', updatePostLoading: false })
     case types.CLEAR_SELECTED_IMG:
       return Object.assign({}, state, { selectedImg: {} })
     default:

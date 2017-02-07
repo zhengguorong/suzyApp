@@ -1,9 +1,6 @@
 package com.suzy;
 
 import com.facebook.react.ReactActivity;
-import com.microsoft.codepush.react.CodePush;
-import com.imagepicker.ImagePickerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainActivity extends ReactActivity {
 

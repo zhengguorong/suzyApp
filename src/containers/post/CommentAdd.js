@@ -24,11 +24,7 @@ class CommentAdd extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.addCommnetResult === 'success') {
-            Alert.alert('结果',"添加成功",[{text:'返回',onPress:()=>{ this.props.navigator.pop()}}])
-        }else if(this.props.addCommnetResult === 'fail'){
-            Alert.alert('结果','添加失败')
-        }
+
     }
 
     render() {
@@ -56,7 +52,10 @@ class CommentAdd extends Component {
             return
         }
         const itemId = this.props.itemId
-        addComment(itemId, tools.author, text)
+        addComment(itemId, tools.author, text, ()=>{
+            this.props.post.commentCount++
+            this.props.navigator.pop()
+        })
     }
 
 }
@@ -72,5 +71,5 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({ addCommnetResult: state.post.addCommnetResult || {} }),
     (dispatch) => ({
-        addComment: (itemId, author, text) => dispatch(postActions.addComment(itemId, author, text)),
+        addComment: (itemId, author, text, cb) => dispatch(postActions.addComment(itemId, author, text, cb)),
     }))(CommentAdd);

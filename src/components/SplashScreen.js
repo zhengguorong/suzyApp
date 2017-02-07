@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     logo: {
         resizeMode: 'contain',
         position: 'absolute',
-        left: -30,
         right: 0,
         bottom: 70,
         height: 54,

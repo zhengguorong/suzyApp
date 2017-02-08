@@ -77,7 +77,7 @@ class PostUpdate extends Component {
       return
     }
 
-    updatePost(id, title, content, author, fileData, ()=> {
+    updatePost({id, title, content, author, fileData}, ()=> {
       this.props.navigator.pop()
       this.props.getPostDetail(this.props.article._id)
     }, ()=> {
@@ -157,6 +157,6 @@ export default connect(state => ({
     selectedImg: (source) => dispatch(postActions.selectedImg(source)),
     clearSelectedImg: () => dispatch(postActions.clearSelectedImg()),
     getPostDetail: (id) => dispatch(postActions.getPostDetail(id)),
-    updatePost: (id, title, content, author, fileData, successCallback, failCallback) => dispatch(postActions.updatePost(id, title, content, author, fileData, successCallback, failCallback)),
+    updatePost: ({id, title, content, author, fileData} , successCallback, failCallback) => dispatch(postActions.updatePost({id, title, content, author, fileData}, successCallback, failCallback)),
     getPosts: (page, count) => dispatch(postActions.getPosts(page, count))
   }))(PostUpdate);

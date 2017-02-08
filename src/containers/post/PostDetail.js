@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux'
 import * as postActions from '../../actions/postActions'
 import tools from '../../util/tools'
+import * as config from '../../util/config'
 import PostUpdate from './PostUpdate'
 import Header from '../../components/Header'
 import CommentList from '../../components/CommentList'
@@ -27,7 +28,7 @@ class PostDetail extends Component {
 
     render() {
         const {article, replies} = this.props
-        const pic = tools.domain + article.pic
+        const pic = config.APP_BASE_DOMAIN + article.pic
         const content = article.content && article.content.replace(/<br>/g, "\n")
         // 只有文章作者才显示编辑按钮
         let showUpdateBtn = true;

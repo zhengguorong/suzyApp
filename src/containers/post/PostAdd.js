@@ -81,7 +81,7 @@ class PostAdd extends Component {
       Alert.alert('提示', '请选择图片')
       return
     }
-    addPost(title, content, author, fileData)
+    addPost({title, content, author, fileData})
   }
   _selectedImg() {
     var options = {
@@ -154,6 +154,6 @@ export default connect(state => ({
   (dispatch) => ({
     selectedImg: (source) => dispatch(postActions.selectedImg(source)),
     clearSelectedImg: () => dispatch(postActions.clearSelectedImg()),
-    addPost: (title, content, author, fileData) => dispatch(postActions.addPost(title, content, author, fileData)),
+    addPost: ({title, content, author, fileData}) => dispatch(postActions.addPost({title, content, author, fileData})),
     getPosts: (page, count) => dispatch(postActions.getPosts(page, count))
   }))(PostAdd);

@@ -2,6 +2,7 @@
  *  app全局相关action
  */
 import http from '../util/http'
+import * as api from '../util/api'
 import * as types from '../constants/ActionTypes'
 import {AsyncStorage} from 'react-native'
 
@@ -26,12 +27,12 @@ export const getCover = () => {
  */
 export const updateCover = () => {
     return (dispatch) => {
-        http.get('http://news-at.zhihu.com/api/4/start-image/1080*1776', (data) => {
+        api.updateCover().then(data => {
             dispatch({ type: types.UPDATE_COVER, data: data })
             AsyncStorage.setItem('cover', JSON.stringify(data))
-        }, (err) => {
-            console.log(err)
-        }, dispatch)
+        }).catch( err => {
+            // console.log(err)
+        })
     }
 }
 /**

@@ -46,14 +46,14 @@ class CommentAdd extends Component {
     }
     _saveComment() {
         const {addComment} = this.props
-        const text = this.refs['commentText'].value
-        if (!text) {
+        const content = this.refs['commentText'].value
+        if (!content) {
             Alert.alert('提示','请输入内容')
             return
         }
-        const itemId = this.props.itemId
-        addComment(itemId, tools.author, text, ()=>{
-            this.props.post.commentCount++
+        const pId = this.props.itemId
+        const author = tools.author
+        addComment({pId, author, content}, ()=>{
             this.props.navigator.pop()
         })
     }
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(state => ({ addCommnetResult: state.post.addCommnetResult || {} }),
+export default connect(state => ({}),
     (dispatch) => ({
-        addComment: (itemId, author, text, cb) => dispatch(postActions.addComment(itemId, author, text, cb)),
+        addComment: ({pId, author, content}, cb) => dispatch(postActions.addComment({pId, author, content}, cb)),
     }))(CommentAdd);

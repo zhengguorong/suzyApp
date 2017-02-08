@@ -11,6 +11,7 @@ import {StyleSheet,
   WebView
 } from 'react-native';
 import tools from '../util/tools'
+import * as config from '../util/config'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
@@ -21,7 +22,7 @@ export default class Counter extends Component {
 
   render() {
     const { post, itemPress, toCommentAdd,like,unLike } = this.props
-    const pic = tools.domain + post.pic
+    const pic = config.APP_BASE_DOMAIN + post.pic
     const createDate = new Date(parseInt(post.createTime));
     const createTime = createDate.getHours() + ':' + createDate.getMinutes()
     const content = post.content&&post.content.replace(/<br>/g, "\n")||''

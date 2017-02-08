@@ -1,68 +1,41 @@
-import * as types from '../constants/ActionTypes'
+import axios from 'axios'
+import * as AppConst from './config'
+
+/**
+ * 无业务逻辑的网络层，作为第三方网络框架的对接与基础配置
+ */
+
+const http = axios.create({
+  baseURL: AppConst.APP_BASE_DOMAIN,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+const crossHttp = axios.create({
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+// Add a response interceptor
+http.interceptors.response.use(function (response) {
+  return response.data
+}, function (error) {
+  if (error.response) {
+    // 请求已经发出去，服务器返回错误
+    console.log(error.response)
+  } else {
+    // 请求没有发出去，网络错误等
+    console.log('Error', error.message)
+  }
+  console.log(error.config)
+  return Promise.reject(error)
+})
 
 module.exports = {
-  /**
-   * 基于fetch的get方法
-   * @method post
-   * @param {string} url
-   * @param {function} callback 请求成功回调
-   */
-  get: function (url, successCallback, failCallback, dispatch) {
-    dispatch({ type: types.FETCH_START })
-    fetch(url, {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-      }
-    })
-      .then((response) => response.text())
-      .then((responseText) => {
-        dispatch({ type: types.FETCH_FINISH })
-        successCallback(JSON.parse(responseText));
-      })
-      .catch(function (err) {
-        dispatch({ type: types.FETCH_FINISH })
-        failCallback && failCallback(err);
-      });
-  },
-  put: function (url, data,successCallback, failCallback, dispatch) {
-    dispatch({ type: types.FETCH_START })
-    fetch(url, {
-      method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => response.text())
-      .then((responseText) => {
-        dispatch({ type: types.FETCH_FINISH })
-        successCallback(JSON.parse(responseText));
-      })
-      .catch(function (err) {
-        dispatch({ type: types.FETCH_FINISH })
-        failCallback && failCallback(err);
-      });
-  },
-  post: function (url, data, successCallback, failCallback, dispatch) {
-    dispatch({ type: types.FETCH_START })
-    fetch(url, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => response.text())
-      .then((responseText) => {
-        dispatch({ type: types.FETCH_FINISH })
-        successCallback(JSON.parse(responseText));
-      })
-      .catch(function (err) {
-        dispatch({ type: types.FETCH_FINISH })
-        failCallback && failCallback(err);
-      });
-  }
-};
+  http,
+  crossHttp
+}

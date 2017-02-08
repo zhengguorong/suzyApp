@@ -122,10 +122,10 @@ class PostList extends Component {
     })
   }
   _like(row) {
-    this.props.like(row)
+    this.props.like(row._id)
   }
   _unlike(row) {
-    this.props.unlike(row)
+    this.props.unlike(row._id)
   }
   _toCommentAdd(row) {
     this.props.navigator.push({
@@ -175,14 +175,13 @@ export default connect(state => ({
   refreshing: state.post.refreshing || false,
   curPage: state.post.curPage || 1,
   posts: state.post.posts || [],
-  likeResult: state.post.likeResult || {},
   fetchingNext: state.post.fetchingNext || false
 }),
   (dispatch) => ({
     getPosts: (page, count) => dispatch(postActions.getPosts(page, count)),
     getLikePosts: (page, count) => dispatch(postActions.getLikePosts(page, count)),
     getNextPosts: (page, count) => dispatch(postActions.getNextPosts(page, count)),
-    like: (post) => dispatch(postActions.like(post)),
-    unlike: (post) => dispatch(postActions.unlike(post))
+    like: (id) => dispatch(postActions.like(id)),
+    unlike: (id) => dispatch(postActions.unlike(id))
   })
 )(PostList);

@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "es6-shim": "^0.35.2",
     "react": "^15.4.1",
     "react-native": "^0.39.2",

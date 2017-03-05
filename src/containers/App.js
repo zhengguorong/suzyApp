@@ -13,13 +13,12 @@ import {
 import * as appActions from '../actions/appActions'
 import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/Ionicons'
+import {myIcon,homeIcon} from '../util/icon'
 import PostList from '../containers/post/PostList'
 import LikePostList from '../containers/post/LikePostList'
 import Mark from '../containers/post/Mark'
 import Navigation from '../components/Navigation'
 import SplashScreen from '../components/SplashScreen'
-
 
 class App extends Component {
   constructor(props) {
@@ -47,25 +46,25 @@ class App extends Component {
       return (
         <TabBarIOS
           barTintColor='#fff'
-          tintColor='#0058f1'>
-          <Icon.TabBarItemIOS
+          tintColor='#d4237a'>
+          <TabBarIOS.Item
             title='文章'
             selected={selectedTab === 'post'}
-            iconName={'ios-home-outline'}
+            icon={{uri: homeIcon, scale: 7}}
             onPress={() => {
               setSelectedTab('post')
             } }>
             <Navigation component={PostList}/>
-          </Icon.TabBarItemIOS>
-          <Icon.TabBarItemIOS
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
             title='喜😍欢'
             selected={selectedTab === 'member'}
-            iconName={'ios-bookmarks-outline'}
+            icon={{uri: myIcon, scale: 7}}
             onPress={() => {
               setSelectedTab('member')
             } }>
             <Navigation component={LikePostList}/>
-          </Icon.TabBarItemIOS>
+          </TabBarIOS.Item>
 
         </TabBarIOS>
       )

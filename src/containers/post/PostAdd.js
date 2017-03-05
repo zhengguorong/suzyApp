@@ -72,15 +72,15 @@ class PostAdd extends Component {
     const title = this.refs['title'].value
     const content = this.refs['content'].value
     const author = tools.author
-    const fileData = selectedSource.uri
+    const fileData = selectedSource.uri || ''
     if (!content) {
       Alert.alert('提示', '请输入内容')
       return
     }
-    if(!fileData){
-      Alert.alert('提示', '请选择图片')
-      return
-    }
+    // if(!fileData){
+    //   Alert.alert('提示', '请选择图片')
+    //   return
+    // }
     addPost({title, content, author, fileData})
   }
   _selectedImg() {

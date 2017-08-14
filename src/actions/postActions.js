@@ -10,8 +10,10 @@ import tools from '../util/tools'
  */
 export const getPosts = (page, count) => {
     return (dispatch) => {
+        console.log(tools.domain, 'domain')
         dispatch({ type: types.FRESH_POST_START })
         http.get(tools.domain + '/api/article/?page=' + page + '&count=' + count, function (data) {
+            console.log(data,'data')
             dispatch({ type: types.FRESH_POST_FINISH })
             dispatch({ type: types.FETCH_POST_LIST, posts: data, page: page })
         }, function (err) {

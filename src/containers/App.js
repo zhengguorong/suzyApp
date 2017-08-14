@@ -26,8 +26,8 @@ class App extends Component {
   }
   componentDidMount() {
     const {getCover, updateCover, hideSplashScreen} = this.props
-    getCover()
-    updateCover()
+    // getCover()
+    // updateCover()
 
     setTimeout(() => {
       hideSplashScreen()
@@ -40,9 +40,9 @@ class App extends Component {
     if (cover.img) {
       Image.prefetch(cover.img)
     }
-    if (splashState) {
-      return <SplashScreen cover={cover}/>
-    } else {
+    // if (splashState) {
+    //   return <SplashScreen cover={cover}/>
+    // } else {
       return (
         <TabBarIOS
           barTintColor='#fff'
@@ -68,7 +68,7 @@ class App extends Component {
 
         </TabBarIOS>
       )
-    }
+    // }
 
   }
 }
